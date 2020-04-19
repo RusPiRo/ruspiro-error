@@ -1,0 +1,23 @@
+[package]
+name = "ruspiro-error"
+authors = ["André Borrmann <pspwizard@gmx.de>"]
+version = "0.1.0"
+description = """
+Definition of the Error trait and error handling related types to make error handling more convinient.
+This is some kind of the duplicate of the rust ``std::error::*`` stuff which does not work in ``#![no_std]``
+environments. However, it is assumed that if this crate is used as a dependencie there will be an allocator
+provided when building the final binary.
+"""
+license = "Apache-2.0"
+repository = "https://github.com/RusPiRo/ruspiro-error/tree/v0.1.0"
+documentation = "https://docs.rs/ruspiro-error/0.1"
+readme = "README.md"
+keywords = ["RusPiRo", "error", "baremetal"]
+categories = ["no-std", "embedded"]
+edition = "2018"
+
+[lib]
+
+[dependencies]
+
+[features]
