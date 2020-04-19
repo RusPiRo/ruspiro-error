@@ -15,6 +15,7 @@ readme = "README.md"
 keywords = ["RusPiRo", "error", "baremetal"]
 categories = ["no-std", "embedded"]
 edition = "2018"
+publish = false
 
 [lib]
 

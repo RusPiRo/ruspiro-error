@@ -21,3 +21,9 @@ ruspiro-error = "0.1"
 
 When using this crate to build a final binary the crate graph need to contain an allocator implementation. The one
 used within the RusPiRo family of crates is [ruspiro-allocator](https://crates.io/crates/ruspiro-allocator)
+
+## License
+ - Licensed under Apache License, Version 2.0, ([LICENSE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+ - MIT license ([LICENSE](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+ 
+ at your choice.
