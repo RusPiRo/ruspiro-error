@@ -8,17 +8,26 @@ This is some kind of the duplicate of the rust ``std::error::*`` stuff which doe
 environments. However, it is assumed that if this crate is used as a dependencie there will be an allocator
 provided when building the final binary.
 """
-license = "Apache-2.0"
-repository = "https://github.com/RusPiRo/ruspiro-error/tree/v0.1.0"
-documentation = "https://docs.rs/ruspiro-error/0.1"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/RusPiRo/ruspiro-error/tree/v||VERSION||"
+documentation = "https://docs.rs/ruspiro-error/||VERSION||"
 readme = "README.md"
 keywords = ["RusPiRo", "error", "baremetal"]
 categories = ["no-std", "embedded"]
 edition = "2018"
-publish = false
+exclude = [".travis.yml", "Makefile.toml"]
 
 [lib]
 
 [dependencies]
 
 [features]
+ruspiro_pi3 = [ ]
+
+[package.metadata.docs.rs]
+targets = ["aarch64-unknown-none", "aarch64-unknown-linux-gnu"]
+features = [
+    "ruspiro_pi3"
+]
+
+[patch.crates-io]
