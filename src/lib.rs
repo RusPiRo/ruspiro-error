@@ -46,7 +46,7 @@ impl<'a, E: Error + 'a + Send> From<E> for Box<dyn Error + 'a + Send> {
 /// ```
 /// # use ruspiro_error::*;
 ///
-/// fn some_function() -> Result<(), BoxedError> {
+/// fn some_function() -> Result<(), BoxError> {
 ///     Err(
 ///         GenericError::with_message("Some Message").into()    
 ///     )
@@ -63,7 +63,7 @@ impl GenericError {
     /// ```
     /// # use ruspiro_error::*;
     ///
-    /// fn some_function() -> Result<(), BoxedError> {
+    /// fn some_function() -> Result<(), BoxError> {
     ///     Err(
     ///         GenericError::default().into()    
     ///     )
@@ -79,7 +79,7 @@ impl GenericError {
     /// ```
     /// # use ruspiro_error::*;
     ///
-    /// fn some_function() -> Result<(), BoxedError> {
+    /// fn some_function() -> Result<(), BoxError> {
     ///     Err(
     ///         GenericError::with_message("Some Message").into()    
     ///     )
