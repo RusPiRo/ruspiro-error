@@ -4,25 +4,25 @@
  * Author: André Borrmann
  * License: Appache License 2.0
  **********************************************************************************************************************/
- #![doc(html_root_url = "https://docs.rs/ruspiro-error/0.1")]
- #![cfg_attr(not(any(test, doctest)), no_std)]
- 
+#![doc(html_root_url = "https://docs.rs/ruspiro-error/||VERSION||")]
+#![cfg_attr(not(any(test, doctest)), no_std)]
+
 //! # Basic Error trait
+//!
 //! This is more or less the same as found in Rust std library:
-//! [Error](https://doc.rust-lang.org/std/error/trait.Error.html) but made available in ``no_std`` environment where an 
+//! [Error](https://doc.rust-lang.org/std/error/trait.Error.html) but made available in `[no_std]` environment where an
 //! allocator is in place, which is the case for the RusPiRo family.
 
 extern crate alloc;
 use alloc::{boxed::Box, string::String};
 use core::fmt::{Debug, Display};
 
-/// The type that shall be used as ``Error`` type when returning a [``Result``]. This allows to use
-/// one return type while the function might use different error types when using the ``?`` operator
-/// and mapping all error types to a generic one would be quite cumbersome
+/// The type that shall be used as `Error` type when returning a [`Result`]. This allows conviniently use the
+/// `?` operator on functions or methods.
 pub type BoxError = Box<dyn Error + Send>; // + Send + Sync needed ?
 
-/// The generic Error trait. All actual errors implementing this trait also need to implement ``Debug``
-/// and ``Display`` to provide human readable text of the error.
+/// The generic Error trait. All actual errors implementing this trait also need to implement `Debug`
+/// and `Display` to provide human readable text of the error.
 pub trait Error: Debug + Display + Send {
     /// the underlaying source of this error, if any. This allows to "stack" errors while keeping
     /// track to it's root cause
@@ -32,24 +32,59 @@ pub trait Error: Debug + Display + Send {
 }
 
 impl<'a, E: Error + 'a + Send> From<E> for Box<dyn Error + 'a + Send> {
-    /// Conviniently convert an [``Error``] into a boxed ``dyn Error``. This allows simple usage of
-    /// ``.into()`` calls when returning an ``Error`` type.
+    /// Conviniently convert an [`Error`] into a boxed `dyn Error`. This allows simple usage of
+    /// `.into()` calls when returning an `Error` type.
     fn from(orig: E) -> Box<dyn Error + 'a + Send> {
         Box::new(orig)
     }
 }
 
-/// The most generic Error type. This should only be used as a fall back in case "you are to lazy" to implement your
-/// specific error type in the crate that is returning the [Err].
+/// The most generic Error type. This can be used if no specific error type will be implemented and returning an erro
+/// only containing an error message is sufficient.
+///
+/// # Example
+/// ```
+/// # use ruspiro_error::*;
+///
+/// fn some_function() -> Result<(), BoxError> {
+///     Err(
+///         GenericError::with_message("Some Message").into()    
+///     )
+/// }
+/// ```
 pub struct GenericError {
     message: Option<String>,
 }
 
 impl GenericError {
+    /// Create a [GenericError] that does not even contain a custom message
+    ///
+    /// # Example
+    /// ```
+    /// # use ruspiro_error::*;
+    ///
+    /// fn some_function() -> Result<(), BoxError> {
+    ///     Err(
+    ///         GenericError::default().into()    
+    ///     )
+    /// }
+    /// ```
     pub fn default() -> Self {
         GenericError { message: None }
     }
 
+    /// Crate a [GenericError] containing the custom error message
+    ///
+    /// # Example
+    /// ```
+    /// # use ruspiro_error::*;
+    ///
+    /// fn some_function() -> Result<(), BoxError> {
+    ///     Err(
+    ///         GenericError::with_message("Some Message").into()    
+    ///     )
+    /// }
+    /// ```
     pub fn with_message(message: &str) -> Self {
         GenericError {
             message: Some(message.into()),
