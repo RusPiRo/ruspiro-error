@@ -1,7 +1,7 @@
 [package]
 name = "ruspiro-error"
 authors = ["André Borrmann <pspwizard@gmx.de>"]
-version = "0.1.0"
+version = "0.1.1"
 description = """
 Definition of the Error trait and error handling related types to make error handling more convinient.
 This is some kind of the duplicate of the rust ``std::error::*`` stuff which does not work in ``#![no_std]``
@@ -15,19 +15,16 @@ readme = "README.md"
 keywords = ["RusPiRo", "error", "baremetal"]
 categories = ["no-std", "embedded"]
 edition = "2018"
-exclude = [".travis.yml", "Makefile.toml"]
+exclude = ["Makefile.toml", ".cargo/config.toml"]
 
 [lib]
 
 [dependencies]
 
 [features]
-ruspiro_pi3 = [ ]
 
 [package.metadata.docs.rs]
-targets = ["aarch64-unknown-none", "aarch64-unknown-linux-gnu"]
-features = [
-    "ruspiro_pi3"
-]
+default-target = "aarch64-unknown-linux-gnu"
+features = []
 
 [patch.crates-io]
