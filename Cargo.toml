@@ -17,6 +17,10 @@ categories = ["no-std", "embedded"]
 edition = "2018"
 exclude = ["Makefile.toml", ".cargo/config.toml"]
 
+[badges]
+maintenance = { status = "actively-developed" }
+is-it-maintained-open-issues = { repository = "RusPiRo/ruspiro-error" }
+
 [lib]
 
 [dependencies]
