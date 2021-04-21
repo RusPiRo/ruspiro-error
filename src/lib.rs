@@ -10,14 +10,14 @@
 //! # Basic Error trait
 //!
 //! This is more or less the same as found in Rust std library:
-//! [Error](https://doc.rust-lang.org/std/error/trait.Error.html) but made available in `[no_std]` environment where an
-//! allocator is in place, which is the case for the RusPiRo family.
+//! [Error](https://doc.rust-lang.org/std/error/trait.Error.html) but made available in `[no_std]` expecting an
+//! allocator to be in place, which provided with [`ruspiro-allocator`](https://crates.io/crates/ruspiro-allocator).
 
 extern crate alloc;
 use alloc::{boxed::Box, string::String};
 use core::fmt::{Debug, Display};
 
-/// The type that shall be used as `Error` type when returning a [`Result`]. This allows conviniently use the
+/// The type that shall be used as `Error` type when returning a [`Result`]. This allows the usage of the
 /// `?` operator on functions or methods.
 pub type BoxError = Box<dyn Error + Send>; // + Send + Sync needed ?
 
